@@ -1,0 +1,67 @@
+{
+  "takServer": {
+    "url": "https://tak-server.example.com",
+    "apiToken": "your-api-token",
+    "clientCert": "/path/to/client.pem",
+    "clientKey": "/path/to/client-key.pem",
+    "verifySsl": true,
+    "timeout": 30000
+  },
+  "mcp": {
+    "transport": "http",
+    "port": 3000,
+    "host": "0.0.0.0",
+    "auth": {
+      "enabled": true,
+      "method": "bearer",
+      "token": "your-mcp-token"
+    }
+  },
+  "tools": {
+    "enabledTools": [
+      "tak_get_cot_events",
+      "tak_send_cot_event",
+      "tak_spatial_query",
+      "tak_get_entities",
+      "tak_subscribe_events",
+      "tak_get_missions",
+      "tak_get_alerts",
+      "tak_calculate_distance",
+      "tak_find_nearest",
+      "tak_create_geofence",
+      "tak_analyze_movement",
+      "tak_send_emergency",
+      "tak_manage_data_packages"
+    ],
+    "toolConfig": {
+      "tak_subscribe_events": {
+        "maxDuration": 3600,
+        "defaultDuration": 300
+      },
+      "tak_spatial_query": {
+        "defaultH3Resolution": 9,
+        "maxRadius": 100000
+      },
+      "tak_analyze_movement": {
+        "defaultAnalysisTypes": ["speed", "pattern"],
+        "anomalyThreshold": 0.8
+      }
+    }
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": 300,
+    "maxSize": 1000
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "file": "./logs/tak-mcp.log",
+    "console": true
+  },
+  "performance": {
+    "maxConcurrentRequests": 10,
+    "requestTimeout": 30000,
+    "connectionPoolSize": 5
+  }
+}

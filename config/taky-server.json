@@ -1,0 +1,34 @@
+{
+  "takServer": {
+    "url": "http://192.168.1.124:8087",
+    "verifySsl": false,
+    "timeout": 30000
+  },
+  "mcp": {
+    "transport": "stdio",
+    "port": 3000,
+    "auth": {
+      "enabled": false
+    }
+  },
+  "tools": {
+    "enabledTools": [
+      "tak_get_cot_events",
+      "tak_send_cot_event",
+      "tak_spatial_query",
+      "tak_get_entities",
+      "tak_subscribe_events",
+      "tak_get_missions",
+      "tak_get_alerts",
+      "tak_calculate_distance",
+      "tak_find_nearest",
+      "tak_create_geofence",
+      "tak_analyze_movement",
+      "tak_send_emergency",
+      "tak_manage_data_packages"
+    ]
+  },
+  "logging": {
+    "level": "info"
+  }
+}

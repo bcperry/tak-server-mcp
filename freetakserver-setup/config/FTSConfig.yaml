@@ -1,0 +1,87 @@
+# FreeTAKServer Configuration
+System:
+  # FTS unique ID
+  FTS_ID: "FreeTAKServer-MCP-Demo"
+  # Node ID for federation
+  nodeID: "Demo-Node"
+
+Addresses:
+  # The IP where FTS is listening
+  FTS_COT_IP: "0.0.0.0"
+  FTS_API_IP: "0.0.0.0"
+  FTS_FED_IP: "0.0.0.0"
+  FTS_DATA_PACKAGE_HOST: "0.0.0.0"
+
+Ports:
+  # CoT Service Port
+  FTS_COT_PORT: 8087
+  # REST API Port
+  FTS_API_PORT: 19023
+  # Federation Port
+  FTS_FED_PORT: 9000
+  # Data Package Port
+  FTS_DATA_PACKAGE_PORT: 8080
+
+TLS:
+  # Certificate settings
+  FTS_CLIENT_CERT_REQUIRED: False
+  FTS_CERT_PASSWORD: "demopassword"
+  
+Filesystem:
+  # Path to data folder
+  FTS_DATA_PATH: "/opt/FTSData"
+  # Database path
+  FTS_DB_PATH: "/opt/FTSData/FTSDataBase.db"
+  # Log file path
+  FTS_LOGFILE_PATH: "/opt/FTSData/logs/FTS.log"
+
+Logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  FTS_LOG_LEVEL: "INFO"
+  # Console log level
+  FTS_CONSOLE_LOG_LEVEL: "INFO"
+  # Log to console
+  FTS_LOG_TO_CONSOLE: True
+
+API:
+  # API version
+  FTS_API_VERSION: "1.0"
+  # Enable Swagger UI
+  FTS_SWAGGER_UI: True
+  # API key (leave empty for no auth)
+  FTS_API_KEY: ""
+
+DataPackage:
+  # Max file size in MB
+  FTS_MAX_FILE_SIZE: 100
+  # Allowed file extensions
+  FTS_ALLOWED_EXTENSIONS: [".zip", ".tar", ".gz", ".kml", ".kmz"]
+
+Emergency:
+  # Emergency types
+  FTS_EMERGENCY_TYPES: ["911", "Hostile", "Contact", "Casualty", "Fire", "Flood"]
+  # Auto-delete after (minutes)
+  FTS_EMERGENCY_TIMEOUT: 30
+
+Federation:
+  # Enable federation
+  FTS_FEDERATION_ENABLED: False
+  # Federation partners
+  FTS_FEDERATION_PARTNERS: []
+
+Performance:
+  # Max concurrent connections
+  FTS_MAX_CONNECTIONS: 100
+  # Connection timeout (seconds)
+  FTS_CONNECTION_TIMEOUT: 300
+  # Database pool size
+  FTS_DB_POOL_SIZE: 10
+
+Features:
+  # Enable/disable features
+  FTS_ENABLE_REST_API: True
+  FTS_ENABLE_COT_STREAMING: True
+  FTS_ENABLE_DATA_PACKAGES: True
+  FTS_ENABLE_EMERGENCY: True
+  FTS_ENABLE_FEDERATION: False
+  FTS_ENABLE_VIDEO: False

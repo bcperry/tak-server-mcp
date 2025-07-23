@@ -1,0 +1,48 @@
+{
+  "takServer": {
+    "url": "https://your-tak-server.com",
+    "apiToken": "your-api-token",
+    "verifySsl": true
+  },
+  "mcp": {
+    "transport": "http",
+    "port": 3000,
+    "auth": {
+      "enabled": false,
+      "method": "apikey"
+    }
+  },
+  "tools": {
+    "enabledTools": [
+      "tak_get_cot_events",
+      "tak_send_cot_event",
+      "tak_spatial_query",
+      "tak_get_entities",
+      "tak_get_entity",
+      "tak_subscribe_events",
+      "tak_get_missions",
+      "tak_create_mission",
+      "tak_update_mission",
+      "tak_delete_mission",
+      "tak_calculate_distance",
+      "tak_find_nearest",
+      "tak_create_geofence",
+      "tak_analyze_movement",
+      "tak_get_alerts",
+      "tak_send_alert",
+      "tak_get_data_packages",
+      "tak_upload_data_package",
+      "tak_download_data_package"
+    ],
+    "geospatial": {
+      "defaultRadius": 1000,
+      "coordinateSystem": "wgs84",
+      "h3Resolution": 9
+    },
+    "cache": {
+      "enabled": true,
+      "ttl": 3600,
+      "maxSize": 1000
+    }
+  }
+}

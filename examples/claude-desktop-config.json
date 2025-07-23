@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "tak-server": {
+      "command": "node",
+      "args": [
+        "/path/to/tak-server-mcp/dist/index.js"
+      ],
+      "env": {
+        "TAK_SERVER_URL": "https://your-tak-server.com",
+        "TAK_SERVER_API_TOKEN": "your-api-token",
+        "MCP_TRANSPORT": "stdio",
+        "LOG_LEVEL": "info"
+      }
+    },
+    "tak-server-docker": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "TAK_SERVER_URL=https://your-tak-server.com",
+        "-e", "TAK_SERVER_API_TOKEN=your-api-token",
+        "skyfi/tak-server-mcp:latest"
+      ]
+    },
+    "tak-server-npm": {
+      "command": "npx",
+      "args": [
+        "@skyfi/tak-server-mcp"
+      ],
+      "env": {
+        "TAK_SERVER_URL": "https://your-tak-server.com",
+        "TAK_SERVER_API_TOKEN": "your-api-token"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  freetakserver:
+    image: freetakteam/freetakserver:latest
+    container_name: freetakserver
+    restart: unless-stopped
+    ports:
+      # CoT Streaming Port (TCP)
+      - "8087:8087"
+      # HTTP Port
+      - "8080:8080"
+      # REST API Port
+      - "19023:19023"
+      # Web UI Port
+      - "5000:5000"
+    volumes:
+      # Data persistence
+      - ./fts-data:/opt/FTSData
+      # Configuration
+      - ./config/FTSConfig.yaml:/opt/FTS/FTSConfig.yaml:ro
+    environment:
+      # Basic configuration
+      - FTS_DATA_PATH=/opt/FTSData
+      - FTS_COT_PORT=8087
+      - FTS_API_PORT=19023
+      - FTS_FED_PORT=9000
+      - FTS_CLIENT_CERT_REQUIRED=False
+      - FTS_DATA_PACKAGE_HOST=0.0.0.0
+      # Logging
+      - FTS_LOG_LEVEL=INFO
+      # Database
+      - FTS_DB_PATH=/opt/FTSData/FTSDataBase.db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:19023/SystemStatus/getStatus"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Optional: FreeTAKServer UI
+  freetakserver-ui:
+    image: freetakteam/ui:latest
+    container_name: freetakserver-ui
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    environment:
+      - FTS_API_HOST=freetakserver
+      - FTS_API_PORT=19023
+    depends_on:
+      - freetakserver
+
+  # Optional: Video Server
+  # freetakserver-video:
+  #   image: freetakteam/freetakserver-video:latest
+  #   container_name: freetakserver-video
+  #   restart: unless-stopped
+  #   ports:
+  #     - "9997:9997"
+  #   environment:
+  #     - FTS_API_HOST=freetakserver
+  #   depends_on:
+  #     - freetakserver
+
+networks:
+  default:
+    name: freetakserver-network
