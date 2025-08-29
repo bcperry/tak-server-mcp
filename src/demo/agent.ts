@@ -185,7 +185,8 @@ Provide:
       ]
     });
 
-    return response.content[0].text;
+    const textContent = response.content.find(c => c.type === 'text');
+    return textContent && 'text' in textContent ? textContent.text : 'No text response received';
   }
 
   async performGeospatialAnalysis(query: string): Promise<any> {
@@ -198,10 +199,7 @@ Provide:
       max_tokens: 2048,
       tools: tools,
       tool_choice: { type: 'auto' },
-      messages: [
-        {
-          role: 'system',
-          content: `You are a geospatial intelligence analyst with access to real-time TAK Server data. 
+      system: `You are a geospatial intelligence analyst with access to real-time TAK Server data. 
           Current tactical situation:
           - Friendly forces: ${this.situation.friendlyForces.length}
           - Hostile forces: ${this.situation.hostileForces.length}
@@ -209,8 +207,8 @@ Provide:
           - Active alerts: ${this.situation.alerts.length}
           - Last update: ${this.situation.lastUpdate.toISOString()}
           
-          Use the available tools to gather data and provide detailed analysis.`
-        },
+          Use the available tools to gather data and provide detailed analysis.`,
+      messages: [
         {
           role: 'user',
           content: query
@@ -240,11 +238,8 @@ Provide:
     const response = await this.anthropic.messages.create({
       model: this.config.model || 'claude-3-opus-20240229',
       max_tokens: 4096,
+      system: 'You are a military intelligence analyst. Generate a comprehensive situation report (SITREP) based on the current tactical data.',
       messages: [
-        {
-          role: 'system',
-          content: 'You are a military intelligence analyst. Generate a comprehensive situation report (SITREP) based on the current tactical data.'
-        },
         {
           role: 'user',
           content: `Generate a detailed SITREP based on this data:
@@ -275,7 +270,8 @@ Include:
       ]
     });
 
-    return response.content[0].text;
+    const textContent = response.content.find(c => c.type === 'text');
+    return textContent && 'text' in textContent ? textContent.text : 'No text response received';
   }
 
   async runInteractiveDemo(): Promise<void> {
@@ -565,7 +561,7 @@ Include:
 }
 
 // Demo runner
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (require.main === module) {
   const agent = new GeospatialResearchAgent({
     anthropicApiKey: process.env.ANTHROPIC_API_KEY || '',
     mcpServerUrl: process.env.MCP_SERVER_URL || 'http://localhost:3000',

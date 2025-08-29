@@ -31,13 +31,13 @@ async function main() {
     verifySsl: config.takServer.verifySsl
   });
 
-  // Test connection
+  // Test connection (optional - don't exit if it fails)
   try {
     await takClient.testConnection();
     logger.info('Successfully connected to TAK Server');
   } catch (error) {
-    logger.error('Failed to connect to TAK Server:', error);
-    process.exit(1);
+    logger.warn('Failed to connect to TAK Server during startup:', error instanceof Error ? error.message : String(error));
+    logger.info('TAK Server connection will be retried when tools are called');
   }
 
   // Create MCP server

@@ -1,14 +1,15 @@
 {
   "takServer": {
     "url": "https://192.168.1.124:8087",
-    "verifySsl": false,
-    "timeout": 30000
+    "apiToken": "eyJraWQiOiJmNmVkMzlmOS1lZTRkLTRhNTQtODI2Yi02Y2UyODI5MjAwZDAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImFkbWluIiwibmJmIjoxNzU2NTAyNzIwLCJleHAiOjE3NTY1MTA1MjAsImlhdCI6MTc1NjUwMjcyMH0.juN9EJa95dwi8gvHW2p3WE6eVqbkK0BqKdxynWZBtUx8W6cZPqY3YLyIFuGcJm6KLWLc8p4U8nSOmuoBaPms3uCgXPTqCBnFYwTs36ilBKnRchqwa7MXD-EwyGOUGyBL0mkZ0zNlr8Z14sqFEYIqhRQZfwxaL_myQsdlbSF9TF0vJ_haGSIz2QcpaKGp5e2CPfVAM9fik1MEo-kaWLZJ8jgzruXUbgTF98Zrdf4cmEETkKE_0dNylSP2Ps0hdOb7oqV84EhVFms-LIyZzVJm2CHgN1mR5ZgwqxCqgBI99_H3pw1P_Y5cs7Wp9aSqPBxNxdD2C0ULfeCnka0t95mw5g",
+    "verifySsl": true
   },
   "mcp": {
     "transport": "stdio",
     "port": 3000,
     "auth": {
-      "enabled": false
+      "enabled": true,
+      "method": "apikey"
     }
   },
   "tools": {

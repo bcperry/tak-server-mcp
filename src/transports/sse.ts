@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
-import { ServerTransport } from '@modelcontextprotocol/sdk/server/types.js';
+import { Transport } from '@modelcontextprotocol/sdk/shared/transport.js';
 import { JSONRPCRequest, JSONRPCResponse } from '@modelcontextprotocol/sdk/types.js';
 import { Config } from '../config/index';
 import pino from 'pino';
@@ -16,12 +16,12 @@ interface SSEClient {
   lastActivity: Date;
 }
 
-export class SSEServerTransport implements ServerTransport {
+export class SSEServerTransport {
   private server: Server;
   private app: express.Application;
   private config: Config;
   private clients: Map<string, SSEClient> = new Map();
-  private cleanupInterval?: NodeJS.Timer;
+  private cleanupInterval?: NodeJS.Timeout;
 
   constructor(server: Server, config: Config) {
     this.server = server;
@@ -175,7 +175,8 @@ export class SSEServerTransport implements ServerTransport {
         }
       };
 
-      this.server['handleRequest'](request, mockConnection);
+      // Process the request through the server
+      (this.server as any)['handleRequest'](request, mockConnection);
     });
   }
 
